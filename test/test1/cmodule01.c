@@ -522,6 +522,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE_API__cmodule01
 #include "math.h"
 #include "funclib.h"
+#include "cudalib.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -916,6 +917,8 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 static float __pyx_f_9cmodule01_add_a_b(float, float, int __pyx_skip_dispatch); /*proto*/
 static float __pyx_f_9cmodule01_cos(float, int __pyx_skip_dispatch); /*proto*/
 static float __pyx_f_9cmodule01_square(float, int __pyx_skip_dispatch); /*proto*/
+static float __pyx_f_9cmodule01_triple(float, int __pyx_skip_dispatch); /*proto*/
+static float __pyx_f_9cmodule01_triple_plus_10(float, int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "cmodule01"
 extern int __pyx_module_is_main_cmodule01;
 int __pyx_module_is_main_cmodule01 = 0;
@@ -934,9 +937,11 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_pf_9cmodule01_add_a_b(CYTHON_UNUSED PyObject *__pyx_self, float __pyx_v_a, float __pyx_v_b); /* proto */
 static PyObject *__pyx_pf_9cmodule01_2cos(CYTHON_UNUSED PyObject *__pyx_self, float __pyx_v_theta); /* proto */
 static PyObject *__pyx_pf_9cmodule01_4square(CYTHON_UNUSED PyObject *__pyx_self, float __pyx_v_a); /* proto */
+static PyObject *__pyx_pf_9cmodule01_6triple(CYTHON_UNUSED PyObject *__pyx_self, float __pyx_v_a); /* proto */
+static PyObject *__pyx_pf_9cmodule01_8triple_plus_10(CYTHON_UNUSED PyObject *__pyx_self, float __pyx_v_a); /* proto */
 
-/* "cmodule01.pyx":11
- * 	float a_square(float a)
+/* "cmodule01.pyx":15
+ * 	float a_triple_plus_10(float)
  * 
  * cpdef float add_a_b(float a, float b) except *:             # <<<<<<<<<<<<<<
  * 	return a + b
@@ -949,7 +954,7 @@ static float __pyx_f_9cmodule01_add_a_b(float __pyx_v_a, float __pyx_v_b, CYTHON
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_a_b", 0);
 
-  /* "cmodule01.pyx":12
+  /* "cmodule01.pyx":16
  * 
  * cpdef float add_a_b(float a, float b) except *:
  * 	return a + b             # <<<<<<<<<<<<<<
@@ -959,8 +964,8 @@ static float __pyx_f_9cmodule01_add_a_b(float __pyx_v_a, float __pyx_v_b, CYTHON
   __pyx_r = (__pyx_v_a + __pyx_v_b);
   goto __pyx_L0;
 
-  /* "cmodule01.pyx":11
- * 	float a_square(float a)
+  /* "cmodule01.pyx":15
+ * 	float a_triple_plus_10(float)
  * 
  * cpdef float add_a_b(float a, float b) except *:             # <<<<<<<<<<<<<<
  * 	return a + b
@@ -1004,11 +1009,11 @@ static PyObject *__pyx_pw_9cmodule01_1add_a_b(PyObject *__pyx_self, PyObject *__
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_b)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_a_b", 1, 2, 2, 1); __PYX_ERR(0, 11, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_a_b", 1, 2, 2, 1); __PYX_ERR(0, 15, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_a_b") < 0)) __PYX_ERR(0, 11, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_a_b") < 0)) __PYX_ERR(0, 15, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1016,12 +1021,12 @@ static PyObject *__pyx_pw_9cmodule01_1add_a_b(PyObject *__pyx_self, PyObject *__
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_a = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_a == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 11, __pyx_L3_error)
-    __pyx_v_b = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_b == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 11, __pyx_L3_error)
+    __pyx_v_a = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_a == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L3_error)
+    __pyx_v_b = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_b == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_a_b", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 11, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_a_b", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 15, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cmodule01.add_a_b", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1041,8 +1046,8 @@ static PyObject *__pyx_pf_9cmodule01_add_a_b(CYTHON_UNUSED PyObject *__pyx_self,
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("add_a_b", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_9cmodule01_add_a_b(__pyx_v_a, __pyx_v_b, 0); if (unlikely(__pyx_t_1 == ((float)-1) && PyErr_Occurred())) __PYX_ERR(0, 11, __pyx_L1_error)
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9cmodule01_add_a_b(__pyx_v_a, __pyx_v_b, 0); if (unlikely(__pyx_t_1 == ((float)-1) && PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -1059,7 +1064,7 @@ static PyObject *__pyx_pf_9cmodule01_add_a_b(CYTHON_UNUSED PyObject *__pyx_self,
   return __pyx_r;
 }
 
-/* "cmodule01.pyx":14
+/* "cmodule01.pyx":18
  * 	return a + b
  * 
  * cpdef float cos(float theta) except *:             # <<<<<<<<<<<<<<
@@ -1073,7 +1078,7 @@ static float __pyx_f_9cmodule01_cos(float __pyx_v_theta, CYTHON_UNUSED int __pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("cos", 0);
 
-  /* "cmodule01.pyx":15
+  /* "cmodule01.pyx":19
  * 
  * cpdef float cos(float theta) except *:
  * 	return cosf(theta)             # <<<<<<<<<<<<<<
@@ -1083,7 +1088,7 @@ static float __pyx_f_9cmodule01_cos(float __pyx_v_theta, CYTHON_UNUSED int __pyx
   __pyx_r = cosf(__pyx_v_theta);
   goto __pyx_L0;
 
-  /* "cmodule01.pyx":14
+  /* "cmodule01.pyx":18
  * 	return a + b
  * 
  * cpdef float cos(float theta) except *:             # <<<<<<<<<<<<<<
@@ -1105,7 +1110,7 @@ static PyObject *__pyx_pw_9cmodule01_3cos(PyObject *__pyx_self, PyObject *__pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("cos (wrapper)", 0);
   assert(__pyx_arg_theta); {
-    __pyx_v_theta = __pyx_PyFloat_AsFloat(__pyx_arg_theta); if (unlikely((__pyx_v_theta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 14, __pyx_L3_error)
+    __pyx_v_theta = __pyx_PyFloat_AsFloat(__pyx_arg_theta); if (unlikely((__pyx_v_theta == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 18, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1127,8 +1132,8 @@ static PyObject *__pyx_pf_9cmodule01_2cos(CYTHON_UNUSED PyObject *__pyx_self, fl
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("cos", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_9cmodule01_cos(__pyx_v_theta, 0); if (unlikely(__pyx_t_1 == ((float)-1) && PyErr_Occurred())) __PYX_ERR(0, 14, __pyx_L1_error)
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9cmodule01_cos(__pyx_v_theta, 0); if (unlikely(__pyx_t_1 == ((float)-1) && PyErr_Occurred())) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -1145,11 +1150,12 @@ static PyObject *__pyx_pf_9cmodule01_2cos(CYTHON_UNUSED PyObject *__pyx_self, fl
   return __pyx_r;
 }
 
-/* "cmodule01.pyx":17
+/* "cmodule01.pyx":21
  * 	return cosf(theta)
  * 
  * cpdef float square(float a) except *:             # <<<<<<<<<<<<<<
  * 	return a_square(a)
+ * 
  */
 
 static PyObject *__pyx_pw_9cmodule01_5square(PyObject *__pyx_self, PyObject *__pyx_arg_a); /*proto*/
@@ -1158,19 +1164,22 @@ static float __pyx_f_9cmodule01_square(float __pyx_v_a, CYTHON_UNUSED int __pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("square", 0);
 
-  /* "cmodule01.pyx":18
+  /* "cmodule01.pyx":22
  * 
  * cpdef float square(float a) except *:
  * 	return a_square(a)             # <<<<<<<<<<<<<<
+ * 
+ * cpdef float triple(float a) except *:
  */
   __pyx_r = a_square(__pyx_v_a);
   goto __pyx_L0;
 
-  /* "cmodule01.pyx":17
+  /* "cmodule01.pyx":21
  * 	return cosf(theta)
  * 
  * cpdef float square(float a) except *:             # <<<<<<<<<<<<<<
  * 	return a_square(a)
+ * 
  */
 
   /* function exit code */
@@ -1187,7 +1196,7 @@ static PyObject *__pyx_pw_9cmodule01_5square(PyObject *__pyx_self, PyObject *__p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("square (wrapper)", 0);
   assert(__pyx_arg_a); {
-    __pyx_v_a = __pyx_PyFloat_AsFloat(__pyx_arg_a); if (unlikely((__pyx_v_a == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 17, __pyx_L3_error)
+    __pyx_v_a = __pyx_PyFloat_AsFloat(__pyx_arg_a); if (unlikely((__pyx_v_a == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 21, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1209,8 +1218,8 @@ static PyObject *__pyx_pf_9cmodule01_4square(CYTHON_UNUSED PyObject *__pyx_self,
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("square", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_9cmodule01_square(__pyx_v_a, 0); if (unlikely(__pyx_t_1 == ((float)-1) && PyErr_Occurred())) __PYX_ERR(0, 17, __pyx_L1_error)
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9cmodule01_square(__pyx_v_a, 0); if (unlikely(__pyx_t_1 == ((float)-1) && PyErr_Occurred())) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -1227,10 +1236,180 @@ static PyObject *__pyx_pf_9cmodule01_4square(CYTHON_UNUSED PyObject *__pyx_self,
   return __pyx_r;
 }
 
+/* "cmodule01.pyx":24
+ * 	return a_square(a)
+ * 
+ * cpdef float triple(float a) except *:             # <<<<<<<<<<<<<<
+ * 	return a_triple(a)
+ * 
+ */
+
+static PyObject *__pyx_pw_9cmodule01_7triple(PyObject *__pyx_self, PyObject *__pyx_arg_a); /*proto*/
+static float __pyx_f_9cmodule01_triple(float __pyx_v_a, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  float __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("triple", 0);
+
+  /* "cmodule01.pyx":25
+ * 
+ * cpdef float triple(float a) except *:
+ * 	return a_triple(a)             # <<<<<<<<<<<<<<
+ * 
+ * cpdef float triple_plus_10(float a) except *:
+ */
+  __pyx_r = a_triple(__pyx_v_a);
+  goto __pyx_L0;
+
+  /* "cmodule01.pyx":24
+ * 	return a_square(a)
+ * 
+ * cpdef float triple(float a) except *:             # <<<<<<<<<<<<<<
+ * 	return a_triple(a)
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9cmodule01_7triple(PyObject *__pyx_self, PyObject *__pyx_arg_a); /*proto*/
+static PyObject *__pyx_pw_9cmodule01_7triple(PyObject *__pyx_self, PyObject *__pyx_arg_a) {
+  float __pyx_v_a;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("triple (wrapper)", 0);
+  assert(__pyx_arg_a); {
+    __pyx_v_a = __pyx_PyFloat_AsFloat(__pyx_arg_a); if (unlikely((__pyx_v_a == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cmodule01.triple", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9cmodule01_6triple(__pyx_self, ((float)__pyx_v_a));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9cmodule01_6triple(CYTHON_UNUSED PyObject *__pyx_self, float __pyx_v_a) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  float __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  __Pyx_RefNannySetupContext("triple", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_9cmodule01_triple(__pyx_v_a, 0); if (unlikely(__pyx_t_1 == ((float)-1) && PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("cmodule01.triple", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cmodule01.pyx":27
+ * 	return a_triple(a)
+ * 
+ * cpdef float triple_plus_10(float a) except *:             # <<<<<<<<<<<<<<
+ * 	return a_triple_plus_10(a)
+ */
+
+static PyObject *__pyx_pw_9cmodule01_9triple_plus_10(PyObject *__pyx_self, PyObject *__pyx_arg_a); /*proto*/
+static float __pyx_f_9cmodule01_triple_plus_10(float __pyx_v_a, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  float __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("triple_plus_10", 0);
+
+  /* "cmodule01.pyx":28
+ * 
+ * cpdef float triple_plus_10(float a) except *:
+ * 	return a_triple_plus_10(a)             # <<<<<<<<<<<<<<
+ */
+  __pyx_r = a_triple_plus_10(__pyx_v_a);
+  goto __pyx_L0;
+
+  /* "cmodule01.pyx":27
+ * 	return a_triple(a)
+ * 
+ * cpdef float triple_plus_10(float a) except *:             # <<<<<<<<<<<<<<
+ * 	return a_triple_plus_10(a)
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_9cmodule01_9triple_plus_10(PyObject *__pyx_self, PyObject *__pyx_arg_a); /*proto*/
+static PyObject *__pyx_pw_9cmodule01_9triple_plus_10(PyObject *__pyx_self, PyObject *__pyx_arg_a) {
+  float __pyx_v_a;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("triple_plus_10 (wrapper)", 0);
+  assert(__pyx_arg_a); {
+    __pyx_v_a = __pyx_PyFloat_AsFloat(__pyx_arg_a); if (unlikely((__pyx_v_a == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cmodule01.triple_plus_10", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_9cmodule01_8triple_plus_10(__pyx_self, ((float)__pyx_v_a));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_9cmodule01_8triple_plus_10(CYTHON_UNUSED PyObject *__pyx_self, float __pyx_v_a) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  float __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  __Pyx_RefNannySetupContext("triple_plus_10", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_9cmodule01_triple_plus_10(__pyx_v_a, 0); if (unlikely(__pyx_t_1 == ((float)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("cmodule01.triple_plus_10", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {"add_a_b", (PyCFunction)__pyx_pw_9cmodule01_1add_a_b, METH_VARARGS|METH_KEYWORDS, 0},
   {"cos", (PyCFunction)__pyx_pw_9cmodule01_3cos, METH_O, 0},
   {"square", (PyCFunction)__pyx_pw_9cmodule01_5square, METH_O, 0},
+  {"triple", (PyCFunction)__pyx_pw_9cmodule01_7triple, METH_O, 0},
+  {"triple_plus_10", (PyCFunction)__pyx_pw_9cmodule01_9triple_plus_10, METH_O, 0},
   {0, 0, 0, 0}
 };
 

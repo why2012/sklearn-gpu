@@ -7,11 +7,11 @@ from cuda_support import get_cuda_support
 CUDA, cuda_build_ext = get_cuda_support()
 
 ext_modules = [
-	Extension("cmodule01", ["cmodule01.pyx", "funclib.c"], 
+	Extension("cmodule01", ["cmodule01.pyx", "funclib.c", "cudalib.cu"], 
 		library_dirs = [CUDA['lib64']], 
 		libraries = ['cudart'], 
 		# runtime_library_dirs = [CUDA['lib64']],
-		extra_compile_args = {'cc': [], 'nvcc': ['-arch=sm_30', '--ptxas-options=-v', '-c', '--compiler-options', "'-fPIC'"]},
+		extra_compile_args = {'cc': [], 'nvcc': ['-arch=sm_30', '--ptxas-options=-v', '-c']},
 		include_dirs = [CUDA['include']]), 
 	Extension("cmodule02", ["cmodule02.pyx"])
 ]
