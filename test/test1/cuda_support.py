@@ -142,6 +142,7 @@ def get_cuda_support():
 					args = [CUDA['nvcc']]
 					args.append(input_opt)
 					args.append("-o=" + obj)
+					args.extend([_arg for _arg in pp_opts if _arg.startswith('-I')])
 					if isinstance(extra_postargs, dict):
 						args.extend(extra_postargs["nvcc"])
 					else:

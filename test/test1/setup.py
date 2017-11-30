@@ -11,7 +11,7 @@ ext_modules = [
 		library_dirs = [CUDA['lib64']], 
 		libraries = ['cudart'], 
 		# runtime_library_dirs = [CUDA['lib64']],
-		extra_compile_args = {'cc': [], 'nvcc': ['-arch=sm_30', '--ptxas-options=-v', '-c']},
+		extra_compile_args = {'cc': [], 'nvcc': ['-arch=sm_30', '-c']},
 		include_dirs = [CUDA['include']]), 
 	Extension("cmodule02", ["cmodule02.pyx"])
 ]
