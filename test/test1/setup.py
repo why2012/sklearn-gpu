@@ -9,10 +9,12 @@ CUDA, cuda_build_ext = get_cuda_support()
 ext_modules = [
 	Extension("cmodule01", ["cmodule01.pyx", "funclib.c", "cudalib.cu"], 
 		library_dirs = [CUDA['lib64']], 
-		libraries = ['cudart'], 
+		libraries = ['cudart', 'cuda'], 
 		# runtime_library_dirs = [CUDA['lib64']],
-		extra_compile_args = {'cc': [], 'nvcc': ['-arch=sm_30', '-c']},
-		include_dirs = [CUDA['include']]), 
+		extra_compile_args = {'cc': [], 'nvcc': ['-arch=compute_30', '-c']},
+		include_dirs = [CUDA['include']],
+		# language = "c++"
+		), 
 	Extension("cmodule02", ["cmodule02.pyx"])
 ]
 setup(

@@ -159,6 +159,7 @@ def get_cuda_support():
 						args.extend(extra_postargs)
 
 				try:
+					# print('-----', args)
 					self.spawn(args)
 				except DistutilsExecError as msg:
 					print("-----", args)
@@ -232,6 +233,7 @@ def get_cuda_support():
 				self.mkpath(output_dir)
 				try:
 					ld_args.append("/NODEFAULTLIB:LIBCMT")
+					# print('-----', ld_args)
 					log.debug('Executing "%s" %s', self.linker, ' '.join(ld_args))
 					self.spawn([self.linker] + ld_args)
 					self._copy_vcruntime(output_dir)
