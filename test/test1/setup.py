@@ -1,12 +1,25 @@
 from distutils.core import setup
 from distutils.extension import Extension
-from Cython.Distutils import build_ext
-#from Cython.Build import cythonize
+from Cython.Build import cythonize
+from cuda_support import get_cuda_support
 
-ext_modules = [Extension("cmodule01", ["cmodule01.pyx"]), Extension("cmodule02", ["cmodule02.pyx"])]
+CUDA, build_ext = get_cuda_support()
+
+ext_modules = [
+	Extension("cmodule01", ["cmodule01.pyx", "funclib.c"], 
+		library_dirs = [CUDA['lib64']], 
+		libraries = ['cudart'], 
+		runtime_library_dirs = [CUDA['lib64']],
+		extra_compile_args = {'gcc': [], 'nvcc': ['-arch=sm_30', '--ptxas-options=-v', '-c', '--compiler-options', "'-fPIC'"]},
+		include_dirs = [CUDA['include']]), 
+	Extension("cmodule02", ["cmodule02.pyx"])
+]
 setup(
     name='cmodules',
+    version = "0.01",  
+    description = '',
     cmdclass = {'build_ext': build_ext},
-    ext_modules = ext_modules
-    #ext_modules = cythonize('cmodule01.pyx')
+    ext_modules = ext_modules,
+    #ext_modules = cythonize('cmodule01.pyx'),
+    zip_safe = False
 )
