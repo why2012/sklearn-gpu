@@ -2,7 +2,10 @@ from distutils.extension import Extension
 from Cython.Distutils import build_ext
 import  os
 from os.path import join as pjoin
-from distutils.errors import CompileError, DistutilsExecError
+from distutils.errors import DistutilsExecError, DistutilsPlatformError, \
+							 CompileError, LibError, LinkError
+from distutils.ccompiler import gen_lib_options
+from distutils import log
 
 def get_cuda_support():
 	def find_in_path(name, path):
@@ -138,6 +141,7 @@ def get_cuda_support():
 				if ext in self._cuda_extensions:
 					args = [CUDA['nvcc']]
 					args.append(input_opt)
+					args.append("-o=" + obj)
 					if isinstance(extra_postargs, dict):
 						args.extend(extra_postargs["nvcc"])
 					else:
@@ -163,10 +167,85 @@ def get_cuda_support():
 
 		self.compile = compile
 
+	def customize_linker_for_nvcc_win(self):
+		def link(
+			 target_desc,
+			 objects,
+			 output_filename,
+			 output_dir=None,
+			 libraries=None,
+			 library_dirs=None,
+			 runtime_library_dirs=None,
+			 export_symbols=None,
+			 debug=0,
+			 extra_preargs=None,
+			 extra_postargs=None,
+			 build_temp=None,
+			 target_lang=None):
+
+			if not self.initialized:
+				self.initialize()
+			objects, output_dir = self._fix_object_args(objects, output_dir)
+			fixed_args = self._fix_lib_args(libraries, library_dirs,
+											runtime_library_dirs)
+			libraries, library_dirs, runtime_library_dirs = fixed_args
+
+			if runtime_library_dirs:
+				self.warn("I don't know what to do with 'runtime_library_dirs': "
+						   + str(runtime_library_dirs))
+
+			lib_opts = gen_lib_options(self,
+									   library_dirs, runtime_library_dirs,
+									   libraries)
+			if output_dir is not None:
+				output_filename = os.path.join(output_dir, output_filename)
+
+			if self._need_link(objects, output_filename):
+				ldflags = self._ldflags[target_desc, debug]
+
+				export_opts = ["/EXPORT:" + sym for sym in (export_symbols or [])]
+
+				ld_args = (ldflags + lib_opts + export_opts +
+						   objects + ['/OUT:' + output_filename])
+
+				# The MSVC linker generates .lib and .exp files, which cannot be
+				# suppressed by any linker switches. The .lib files may even be
+				# needed! Make sure they are generated in the temporary build
+				# directory. Since they have different names for debug and release
+				# builds, they can go into the same directory.
+				build_temp = os.path.dirname(objects[0])
+				if export_symbols is not None:
+					(dll_name, dll_ext) = os.path.splitext(
+						os.path.basename(output_filename))
+					implib_file = os.path.join(
+						build_temp,
+						self.library_filename(dll_name))
+					ld_args.append ('/IMPLIB:' + implib_file)
+
+				if extra_preargs:
+					ld_args[:0] = extra_preargs
+				if extra_postargs:
+					ld_args.extend(extra_postargs)
+
+				output_dir = os.path.dirname(os.path.abspath(output_filename))
+				self.mkpath(output_dir)
+				try:
+					ld_args.append("/NODEFAULTLIB:LIBCMT")
+					log.debug('Executing "%s" %s', self.linker, ' '.join(ld_args))
+					self.spawn([self.linker] + ld_args)
+					self._copy_vcruntime(output_dir)
+				except DistutilsExecError as msg:
+					raise LinkError(msg)
+			else:
+				log.debug("skipping %s (up-to-date)", output_filename)
+
+		self.link = link
+
 	# run the customize_compiler
 	class custom_build_ext(build_ext):
 		def build_extensions(self):
 			customize_compiler_for_nvcc_win(self.compiler)
+			customize_linker_for_nvcc_win(self.compiler)
 			build_ext.build_extensions(self)
 
 	CUDA = locate_cuda()
