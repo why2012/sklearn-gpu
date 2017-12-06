@@ -1,4 +1,7 @@
 # coding: utf-8
+# import numpy as np
+# cimport numpy as np
+
 cdef extern from "math.h":
 	float cosf(float)
 	float sinf(float)
@@ -9,9 +12,7 @@ cdef extern from "funclib.h":
 	float a_square(float)
 
 cdef extern from "cudalib.h":
-	float a_triple(float)
-	float a_triple_plus_10(float)
-	void helloworld()
+	int cuCheck()
 
 cpdef float add_a_b(float a, float b) except *:
 	return a + b
@@ -22,11 +23,8 @@ cpdef float cos(float theta) except *:
 cpdef float square(float a) except *:
 	return a_square(a)
 
-cpdef float triple(float a) except *:
-	return a_triple(a)
+# cpdef float npsum(np.ndarray[np.float64_t, ndim=1] arr) except *:
+# 	return np.sum(arr)
 
-cpdef float triple_plus_10(float a) except *:
-	return a_triple_plus_10(a)
-
-cpdef void hello_world() except *:
-	helloworld()
+cpdef void gpu_check() except *:
+	cuCheck()

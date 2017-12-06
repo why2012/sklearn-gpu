@@ -36,6 +36,21 @@ def get_cuda_support():
 
 		return cudaconfig
 
+	def rename_cuda_ext(cuda_files, ext = ".c", Cdir = "", cudadir = "cuda"):
+		if isinstance(cuda_files, str):
+			cuda_files = [cuda_files]
+		if not cudadir.endswith("/"):
+			cudadir += "/"
+		if not os.path.exists(cudadir):
+			os.mkdir(cudadir)
+		for cuda_file in cuda_files:
+			real_cuda_file = os.path.splitext(cuda_file)[0] + ext
+			if os.path.exists(real_cuda_file):
+				cufile = open(cudadir + cuda_file, 'w')
+				cufile.write(open(Cdir + real_cuda_file).read())
+				cufile.close()
+
+
 	def customize_compiler_for_nvcc_unix(self):
 		self.src_extensions.append('.cu')
 		# save references to the default compiler_so and _comple methods
@@ -137,6 +152,9 @@ def get_cuda_support():
 					raise CompileError("Don't know how to compile {} to {}, ext {}"
 									   .format(src, obj, ext))
 
+				# release MT
+				if "/MD" in compile_opts:
+					pass#compile_opts[compile_opts.index("/MD")] = "/MT"
 				# for cuda compiler
 				if ext in self._cuda_extensions:
 					args = [CUDA['nvcc']]
@@ -235,11 +253,11 @@ def get_cuda_support():
 				self.mkpath(output_dir)
 				try:
 					ld_args.append("/NODEFAULTLIB:LIBCMT")
-					# print('-----', ld_args)
 					log.debug('Executing "%s" %s', self.linker, ' '.join(ld_args))
 					self.spawn([self.linker] + ld_args)
 					self._copy_vcruntime(output_dir)
 				except DistutilsExecError as msg:
+					print('-----', ld_args)
 					raise LinkError(msg)
 			else:
 				log.debug("skipping %s (up-to-date)", output_filename)
