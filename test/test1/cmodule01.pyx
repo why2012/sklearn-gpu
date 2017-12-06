@@ -1,6 +1,6 @@
 # coding: utf-8
-# import numpy as np
-# cimport numpy as np
+import numpy as np
+cimport numpy as np
 
 cdef extern from "math.h":
 	float cosf(float)
@@ -23,8 +23,8 @@ cpdef float cos(float theta) except *:
 cpdef float square(float a) except *:
 	return a_square(a)
 
-# cpdef float npsum(np.ndarray[np.float64_t, ndim=1] arr) except *:
-# 	return np.sum(arr)
+cpdef float npsum(np.ndarray[np.float64_t, ndim=1] arr) except *:
+	return np.sum(arr)
 
 cpdef void gpu_check() except *:
 	cuCheck()

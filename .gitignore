@@ -1,6 +1,7 @@
 __pycache__/
 build/
 *.c
+*.cpp
 *.pyd
 *.lib
 *.exp

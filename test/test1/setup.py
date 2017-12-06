@@ -12,7 +12,7 @@ ext_modules = [
 		library_dirs = [CUDA['lib64']], 
 		libraries = ['cudart', 'cuda'], 
 		# runtime_library_dirs = [CUDA['lib64']],
-		extra_compile_args = {'cc': [], 'nvcc': ['-arch=sm_30', '-c']},
+		extra_compile_args = {'cc': [], 'nvcc': ['-arch=sm_30', '-c', '-Xcompiler', '/MD']},
 		include_dirs = [CUDA['include'], numpy.get_include()],
 		language = "c++"
 		), 
