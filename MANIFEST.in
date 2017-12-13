@@ -1,0 +1,3 @@
+recursive-include sklgpu  *.cpp *.cc *.c *.h *.cu *.cuh *.py *.pyx *.pxd *.pxi
+include README
+include *.py

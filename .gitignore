@@ -1,8 +1,10 @@
 __pycache__/
 build/
+dist/
 *.c
 *.cpp
 *.pyd
 *.lib
 *.exp
 *.obj
+MANIFEST
