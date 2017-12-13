@@ -1,8 +1,3 @@
-#! /usr/bin/env python
-#
-# Copyright (C) 2007-2009 Cournapeau David <cournape@gmail.com>
-#               2010 Fabian Pedregosa <fabian.pedregosa@inria.fr>
-# License: 3-clause BSD
 descr = """sklearn gpu plus"""
 
 import sys
@@ -20,8 +15,6 @@ URL = 'Omitted'
 DOWNLOAD_URL = 'Omitted'
 LICENSE = 'Omitted'
 VERSION = "0.0.1"
-
-# Custom clean command to remove build artifacts
 
 class CleanCommand(Clean):
     description = "Remove build artifacts from the source tree"
